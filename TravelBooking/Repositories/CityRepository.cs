@@ -1,5 +1,5 @@
 ﻿using TravelBooking.Data;
-using TravelBooking.Models;
+using TravelBooking.Models.DBObjects;
 
 namespace TravelBooking.Repositories
 {

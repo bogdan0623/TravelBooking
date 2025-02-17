@@ -19,6 +19,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<StatusRepository>();
 builder.Services.AddTransient<CountryRepository>();
 builder.Services.AddTransient<CityRepository>();
+builder.Services.AddTransient<CustomerRepository>();
 
 var app = builder.Build();
 

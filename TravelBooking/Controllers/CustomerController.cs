@@ -1,51 +1,62 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TravelBooking.Models.DBObjects;
+using TravelBooking.Models.ViewModels;
 using TravelBooking.Repositories;
 
 namespace TravelBooking.Controllers
-{
-    public class StatusController : Controller
+{    
+    public class CustomerController : Controller
     {
-        private readonly StatusRepository _statusRepository;
+        private readonly CustomerRepository _customerRepository;
 
-        public StatusController(StatusRepository statusRepository)
+        public CustomerController(CustomerRepository customerRepository)
         {
-            _statusRepository = statusRepository;
+            _customerRepository = customerRepository;
         }
 
-        // GET: StatusController
+        // GET: CustomerController
         public ActionResult Index()
         {
-            var statuses = _statusRepository.GetStatuses();
-            return View(statuses);
+            var customers = _customerRepository.GetCustomers().Select(
+                customer => new CustomerViewModel
+                {
+                    CustomerId = customer.CustomerId,
+                    Name = customer.FirstName + " " + customer.LastName,
+                    Email = customer.Email,
+                    Phone = customer.Phone
+                }).ToList();
+            return View(customers);
         }
 
-        // GET: StatusController/Details/5
+        // GET: CustomerController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: StatusController/Create
+        // GET: CustomerController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: StatusController/Create
+        // POST: CustomerController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
         {
             try
             {
-                Status status = new Status
+                var customer = new Customer
                 {
-                    StatusId = int.Parse(collection["StatusId"]),
-                    Value = collection["Value"]
+                    CustomerId = Guid.NewGuid(),
+                    FirstName = collection["FirstName"],
+                    LastName = collection["LastName"],
+                    Email = collection["Email"],
+                    Phone = collection["Phone"]
                 };
-                _statusRepository.AddStatus(status);
+                _customerRepository.AddCustomer(customer);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -55,27 +66,19 @@ namespace TravelBooking.Controllers
             }
         }
 
-        // GET: StatusController/Edit/5
+        // GET: CustomerController/Edit/5
         public ActionResult Edit(int id)
         {
-            var status = _statusRepository.GetStatusById(id);
-            return View(status);
+            return View();
         }
 
-        // POST: StatusController/Edit/5
+        // POST: CustomerController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
         {
             try
             {
-                var status = new Status
-                {
-                    StatusId = id,
-                    Value = collection["Value"]
-                };
-                _statusRepository.UpdateStatus(status);
-
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -84,21 +87,19 @@ namespace TravelBooking.Controllers
             }
         }
 
-        // GET: StatusController/Delete/5
+        // GET: CustomerController/Delete/5
         public ActionResult Delete(int id)
         {
-            var status = _statusRepository.GetStatusById(id);
-            return View(status);
+            return View();
         }
 
-        // POST: StatusController/Delete/5
+        // POST: CustomerController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
         {
             try
             {
-                _statusRepository.DeleteStatus(id);
                 return RedirectToAction(nameof(Index));
             }
             catch

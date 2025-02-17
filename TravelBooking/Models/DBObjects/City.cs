@@ -1,4 +1,4 @@
-﻿namespace TravelBooking.Models
+﻿namespace TravelBooking.Models.DBObjects
 {
     public class City
     {

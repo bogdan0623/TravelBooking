@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using TravelBooking.Models;
+using TravelBooking.Models.DBObjects;
 using TravelBooking.Repositories;
 
 namespace TravelBooking.Controllers
