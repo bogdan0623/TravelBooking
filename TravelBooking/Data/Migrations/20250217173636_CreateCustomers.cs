@@ -16,10 +16,10 @@ namespace TravelBooking.Data.Migrations
                 columns: table => new
                 {
                     CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NewId()"),
-                    FirstName = table.Column<string>(type: "nvarchar(256)", nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(256)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(256)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(256)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(256)", nullable: false)
+                    Phone = table.Column<string>(type: "nvarchar(256)", nullable: true)
                 },
                 constraints: table =>
                 {

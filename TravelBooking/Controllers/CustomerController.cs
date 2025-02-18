@@ -88,18 +88,27 @@ namespace TravelBooking.Controllers
         }
 
         // GET: CustomerController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(Guid id)
         {
-            return View();
+            var customer = _customerRepository.GetCustomerById(id);
+            var customerViewModel = new CustomerViewModel
+            {
+                CustomerId = customer.CustomerId,
+                Name = customer.FirstName + ' ' + customer.LastName,
+                Email = customer.Email,
+                Phone = customer.Phone
+            };
+            return View(customerViewModel);
         }
 
         // POST: CustomerController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(Guid id, IFormCollection collection)
         {
             try
             {
+                _customerRepository.DeleteCustomer(id);
                 return RedirectToAction(nameof(Index));
             }
             catch
