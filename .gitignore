@@ -55,3 +55,4 @@ Desktop.ini
 #Ignore project files
 wwwroot/
 *.csproj
+ScaffoldingReadMe.txt
