@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TravelBooking.Factories;
 using TravelBooking.Models.DBObjects;
 using TravelBooking.Models.ViewModels;
 using TravelBooking.Repositories;
@@ -9,23 +10,19 @@ namespace TravelBooking.Controllers
     public class CustomerController : Controller
     {
         private readonly CustomerRepository _customerRepository;
+        private readonly CustomerViewModelFactory _customerViewModelFactory;
 
-        public CustomerController(CustomerRepository customerRepository)
+        public CustomerController(CustomerRepository customerRepository, CustomerViewModelFactory customerViewModelFactory)
         {
             _customerRepository = customerRepository;
+            _customerViewModelFactory = customerViewModelFactory;
         }
 
         // GET: CustomerController
         public ActionResult Index()
         {
             var customers = _customerRepository.GetCustomers().Select(
-                customer => new CustomerViewModel
-                {
-                    CustomerId = customer.CustomerId,
-                    Name = customer.FirstName + " " + customer.LastName,
-                    Email = customer.Email,
-                    Phone = customer.Phone
-                }).ToList();
+                _customerViewModelFactory.GetNewCustomerViewModel).ToList();
             return View(customers);
         }
 
@@ -91,13 +88,7 @@ namespace TravelBooking.Controllers
         public ActionResult Delete(Guid id)
         {
             var customer = _customerRepository.GetCustomerById(id);
-            var customerViewModel = new CustomerViewModel
-            {
-                CustomerId = customer.CustomerId,
-                Name = customer.FirstName + ' ' + customer.LastName,
-                Email = customer.Email,
-                Phone = customer.Phone
-            };
+            var customerViewModel = _customerViewModelFactory.GetNewCustomerViewModel(customer);
             return View(customerViewModel);
         }
 

@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using TravelBooking.Factories;
+using TravelBooking.Models.DBObjects;
+using TravelBooking.Models.ViewModels;
 using TravelBooking.Repositories;
 
 namespace TravelBooking.Areas.Identity.Pages.Account.Manage
@@ -42,6 +45,16 @@ namespace TravelBooking.Areas.Identity.Pages.Account.Manage
         [TempData]
         public string StatusMessage { get; set; }
 
+        // CustomerViewModel data
+        public Customer Customer { get; set; }
+
+        [BindProperty]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [BindProperty]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
@@ -75,6 +88,10 @@ namespace TravelBooking.Areas.Identity.Pages.Account.Manage
             {
                 PhoneNumber = phoneNumber
             };
+
+            Customer = _customerRepository.GetCustomerByEmail(Username);
+            LastName = Customer.LastName;
+            FirstName = Customer.FirstName;
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -84,8 +101,9 @@ namespace TravelBooking.Areas.Identity.Pages.Account.Manage
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
+            
+            await LoadAsync(user);            
 
-            await LoadAsync(user);
             return Page();
         }
 
@@ -104,6 +122,7 @@ namespace TravelBooking.Areas.Identity.Pages.Account.Manage
             }
 
             var customer = _customerRepository.GetCustomerByEmail(user.Email);
+            bool isCustomerModified = false;
 
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             if (Input.PhoneNumber != phoneNumber)
@@ -115,8 +134,25 @@ namespace TravelBooking.Areas.Identity.Pages.Account.Manage
                     return RedirectToPage();
                 }
                 customer.Phone = Input.PhoneNumber;
-                _customerRepository.UpdateCustomer(customer);
+                isCustomerModified = true;                
             }
+            
+            if(customer.FirstName != FirstName)
+            {
+                customer.FirstName = FirstName;
+                isCustomerModified = true;
+            }
+
+            if (customer.LastName != LastName)
+            {
+                customer.LastName = LastName;
+                isCustomerModified = true;
+            }
+
+            if (isCustomerModified)
+            {
+                _customerRepository.UpdateCustomer(customer);
+            }            
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";

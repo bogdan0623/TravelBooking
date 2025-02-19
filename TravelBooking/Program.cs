@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TravelBooking.Data;
+using TravelBooking.Factories;
 using TravelBooking.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +21,7 @@ builder.Services.AddTransient<StatusRepository>();
 builder.Services.AddTransient<CountryRepository>();
 builder.Services.AddTransient<CityRepository>();
 builder.Services.AddTransient<CustomerRepository>();
+builder.Services.AddTransient<CustomerViewModelFactory>();
 
 var app = builder.Build();
 
