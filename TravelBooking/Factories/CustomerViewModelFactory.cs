@@ -16,13 +16,7 @@ namespace TravelBooking.Factories
         public CustomerViewModel GetNewCustomerViewModel(string email)
         {
             var customer = _customerRepository.GetCustomerByEmail(email);
-            return new CustomerViewModel
-            {
-                CustomerId = customer.CustomerId,
-                Name = customer.FirstName + " " + customer.LastName,
-                Email = customer.Email,
-                Phone = customer.Phone
-            };
+            return GetNewCustomerViewModel(customer);
         }
 
         public CustomerViewModel GetNewCustomerViewModel(Customer customer)
