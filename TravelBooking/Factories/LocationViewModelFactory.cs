@@ -15,8 +15,9 @@ namespace TravelBooking.Factories
             _cityRepository = cityRepository;
         }
 
-        public LocationViewModel GetNewLocationViewModel(Country country, City city)
+        public LocationViewModel GetNewLocationViewModel(City city)
         {
+            var country = _countryRepository.GetCountryById(city.CountryId);
             return new LocationViewModel
             {
                 CityName = city.Name,
@@ -24,11 +25,10 @@ namespace TravelBooking.Factories
             };
         }
 
-        public LocationViewModel GetNewLocationViewModel(string countryName, string cityName)
+        public LocationViewModel GetNewLocationViewModel(string cityName)
         {
             var city = _cityRepository.GetCityByName(cityName);
-            var country = _countryRepository.GetCountryByName(countryName);
-            return GetNewLocationViewModel(country, city);
+            return GetNewLocationViewModel(city);
         }
     }
 }
