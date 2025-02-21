@@ -22,6 +22,7 @@ builder.Services.AddTransient<CountryRepository>();
 builder.Services.AddTransient<CityRepository>();
 builder.Services.AddTransient<CustomerRepository>();
 builder.Services.AddTransient<CustomerViewModelFactory>();
+builder.Services.AddTransient<LocationViewModelFactory>();
 
 var app = builder.Build();
 

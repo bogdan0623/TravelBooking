@@ -15,6 +15,6 @@ namespace TravelBooking.Models.ViewModels
 
         public decimal PricePernightPerPerson { get; set; }
 
-        public IFormFile? Picture { get; set; }
+        public string PicturePath { get; set; }
     }
 }
