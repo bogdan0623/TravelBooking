@@ -22,6 +22,11 @@ namespace TravelBooking.Repositories
             return _context.Countries.FirstOrDefault(c => c.CountryId == id);
         }
 
+        public Country GetCountryByName(string name)
+        {
+            return _context.Countries.FirstOrDefault(c => c.Name == name);
+        }
+
         public void AddCountry(Country country)
         {
             _context.Countries.Add(country);

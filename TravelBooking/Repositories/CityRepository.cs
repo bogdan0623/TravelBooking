@@ -22,6 +22,11 @@ namespace TravelBooking.Repositories
             return _context.Cities.FirstOrDefault(c => c.CityId == id);
         }
 
+        public City GetCityByName(string name)
+        {
+            return _context.Cities.FirstOrDefault(c => c.Name == name);
+        }
+
         public void AddCity(City city)
         {
             _context.Cities.Add(city);
