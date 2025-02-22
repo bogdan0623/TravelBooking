@@ -33,6 +33,7 @@ out/
 # Ignore ASP.NET Core secrets
 secrets.json
 appsettings.Development.json
+appsettings.json
 
 # Ignore logs and database files
 logs/
