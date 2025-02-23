@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TravelBooking.Models.DBObjects;
 using TravelBooking.Repositories;
 
 namespace TravelBooking.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CityController : Controller
     {
         private readonly CityRepository _cityRepository;

@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TravelBooking.Models.DBObjects;
 using TravelBooking.Repositories;
 
 namespace TravelBooking.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CountryController : Controller
     {
         private readonly CountryRepository _countryRepository;

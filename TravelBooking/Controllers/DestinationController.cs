@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TravelBooking.Factories;
 using TravelBooking.Repositories;
@@ -19,6 +20,10 @@ namespace TravelBooking.Controllers
         // GET: DestinationController
         public ActionResult Index()
         {
+            if(!User.Identity.IsAuthenticated)
+            {
+                return Redirect("/Identity/Account/Login");
+            }
             var destinations = _destinationRepository.GetDestinations().Select(
                 _destinationViewModelFactory.GetNewDestinationViewModel).ToList();
             return View(destinations);
@@ -27,10 +32,15 @@ namespace TravelBooking.Controllers
         // GET: DestinationController/Details/5
         public ActionResult Details(int id)
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return Redirect("/Identity/Account/Login");
+            }
             return View();
         }
 
         // GET: DestinationController/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -52,6 +62,7 @@ namespace TravelBooking.Controllers
         }
 
         // GET: DestinationController/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
             return View();
@@ -73,6 +84,7 @@ namespace TravelBooking.Controllers
         }
 
         // GET: DestinationController/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             return View();
