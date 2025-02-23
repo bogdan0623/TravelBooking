@@ -18,8 +18,8 @@ namespace TravelBooking.Data.Migrations
                     'H1',
                     CityId,
                     '',
-                    200,
-                    'wwwroot/images/f1.jpg'
+                    200.0,
+                    'f1.jpg'
                 FROM Cities
                 WHERE Name = 'Barcelona';
             ");
@@ -30,8 +30,8 @@ namespace TravelBooking.Data.Migrations
                     'H2',
                     CityId,
                     '',
-                    200,
-                    'wwwroot/images/f2.jpg'
+                    200.0,
+                    'f2.jpg'
                 FROM Cities
                 WHERE Name = 'Barcelona';
             ");
@@ -43,8 +43,8 @@ namespace TravelBooking.Data.Migrations
                     'H3',
                     CityId,
                     '',
-                    200,
-                    'wwwroot/images/f3.jpg'
+                    200.0,
+                    'f3.jpg'
                 FROM Cities
                 WHERE Name = 'Alicante';
             ");
@@ -58,8 +58,8 @@ namespace TravelBooking.Data.Migrations
                     'H4',
                     CityId,
                     '',
-                    200,
-                    'wwwroot/images/f4.jpg'
+                    200.0,
+                    'f4.jpg'
                 FROM Cities
                 WHERE Name = 'Rodos';
             ");
@@ -71,8 +71,8 @@ namespace TravelBooking.Data.Migrations
                     'H5',
                     CityId,
                     '',
-                    200,
-                    'wwwroot/images/f5.jpg'
+                    200.0,
+                    'f5.jpg'
                 FROM Cities
                 WHERE Name = 'Zakynthos';
             ");
@@ -86,8 +86,8 @@ namespace TravelBooking.Data.Migrations
                     'H6',
                     CityId,
                     '',
-                    200,
-                    'wwwroot/images/f6.jpg'
+                    200.0,
+                    'f6.jpg'
                 FROM Cities
                 WHERE Name = 'Milano';
             ");
@@ -99,8 +99,8 @@ namespace TravelBooking.Data.Migrations
                     'H7',
                     CityId,
                     '',
-                    200,
-                    'wwwroot/images/f7.jpg'
+                    200.0,
+                    'f7.jpg'
                 FROM Cities
                 WHERE Name = 'Roma';
             ");

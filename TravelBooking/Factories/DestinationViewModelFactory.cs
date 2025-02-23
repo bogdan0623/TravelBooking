@@ -1,4 +1,5 @@
-﻿using TravelBooking.Models.DBObjects;
+﻿using System.Globalization;
+using TravelBooking.Models.DBObjects;
 using TravelBooking.Models.ViewModels;
 using TravelBooking.Repositories;
 
@@ -28,8 +29,8 @@ namespace TravelBooking.Factories
                 Name = destination.Name,
                 Location = locationViewModel.CityName + ", " + locationViewModel.CountryName,
                 Description = destination.Description,
-                PricePernightPerPerson = destination.PricePernightPerPerson,
-                PicturePath = Path.Combine(Directory.GetCurrentDirectory(), destination.Picture)
+                PricePernightPerPerson = destination.PricePernightPerPerson.ToString("C", CultureInfo.GetCultureInfo("fr-FR")),
+                PicturePath = "/images/" + destination.Picture
             };
         }
     }

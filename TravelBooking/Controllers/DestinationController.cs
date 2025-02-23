@@ -7,19 +7,21 @@ namespace TravelBooking.Controllers
 {
     public class DestinationController : Controller
     {   
-        private readonly DestinationRepository _repository;
+        private readonly DestinationRepository _destinationRepository;
         private readonly DestinationViewModelFactory _destinationViewModelFactory;
 
-        public DestinationController(DestinationRepository repository, DestinationViewModelFactory destinationViewModelFactory)
+        public DestinationController(DestinationRepository destinationRepository, DestinationViewModelFactory destinationViewModelFactory)
         {
-            _repository = repository;
+            _destinationRepository = destinationRepository;
             _destinationViewModelFactory = destinationViewModelFactory;
         }
 
         // GET: DestinationController
         public ActionResult Index()
         {
-            return View();
+            var destinations = _destinationRepository.GetDestinations().Select(
+                _destinationViewModelFactory.GetNewDestinationViewModel).ToList();
+            return View(destinations);
         }
 
         // GET: DestinationController/Details/5

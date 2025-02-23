@@ -13,7 +13,7 @@ namespace TravelBooking.Models.ViewModels
 
         public string Description { get; set; }
 
-        public decimal PricePernightPerPerson { get; set; }
+        public string PricePernightPerPerson { get; set; }
 
         public string PicturePath { get; set; }
     }

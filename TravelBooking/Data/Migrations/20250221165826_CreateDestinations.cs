@@ -15,7 +15,7 @@ namespace TravelBooking.Data.Migrations
                 name: "Destinations",
                 columns: table => new
                 {
-                    DestionationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NewId()"),
+                    DestinationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NewId()"),
                     Name = table.Column<string>(type: "nvarchar(256)", nullable: false),
                     CityId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -24,7 +24,7 @@ namespace TravelBooking.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Destinations", x => x.DestionationId);
+                    table.PrimaryKey("PK_Destinations", x => x.DestinationId);
                     table.ForeignKey(
                         "FK_Destinations_Cities_CityId",
                         column: x => x.CityId,
