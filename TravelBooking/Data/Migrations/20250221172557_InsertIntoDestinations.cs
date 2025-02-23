@@ -13,38 +13,35 @@ namespace TravelBooking.Data.Migrations
             // -------------------- Spania --------------------
             // Barcelona
             migrationBuilder.Sql(@"
-                INSERT INTO Destinations (Name, CityId, Description, PricePerNightPerPerson, Picture)
+                INSERT INTO Destinations (Name, CityId, Description, PricePerNightPerPerson)
                 SELECT
                     'H1',
                     CityId,
                     '',
-                    200.0,
-                    'f1.jpg'
+                    200.0
                 FROM Cities
                 WHERE Name = 'Barcelona';
             ");
 
             migrationBuilder.Sql(@"
-                INSERT INTO Destinations (Name, CityId, Description, PricePerNightPerPerson, Picture)
+                INSERT INTO Destinations (Name, CityId, Description, PricePerNightPerPerson)
                 SELECT
                     'H2',
                     CityId,
                     '',
-                    200.0,
-                    'f2.jpg'
+                    200.0
                 FROM Cities
                 WHERE Name = 'Barcelona';
             ");
 
             // Alicante
             migrationBuilder.Sql(@"
-                INSERT INTO Destinations (Name, CityId, Description, PricePerNightPerPerson, Picture)
+                INSERT INTO Destinations (Name, CityId, Description, PricePerNightPerPerson)
                 SELECT
                     'H3',
                     CityId,
                     '',
-                    200.0,
-                    'f3.jpg'
+                    200.0
                 FROM Cities
                 WHERE Name = 'Alicante';
             ");
@@ -53,26 +50,24 @@ namespace TravelBooking.Data.Migrations
             // -------------------- Grecia --------------------
             // Rodos
             migrationBuilder.Sql(@"
-                INSERT INTO Destinations (Name, CityId, Description, PricePerNightPerPerson, Picture)
+                INSERT INTO Destinations (Name, CityId, Description, PricePerNightPerPerson)
                 SELECT
                     'H4',
                     CityId,
                     '',
-                    200.0,
-                    'f4.jpg'
+                    200.0
                 FROM Cities
                 WHERE Name = 'Rodos';
             ");
 
             // Zakynthos
             migrationBuilder.Sql(@"
-                INSERT INTO Destinations (Name, CityId, Description, PricePerNightPerPerson, Picture)
+                INSERT INTO Destinations (Name, CityId, Description, PricePerNightPerPerson)
                 SELECT
                     'H5',
                     CityId,
                     '',
-                    200.0,
-                    'f5.jpg'
+                    200.0
                 FROM Cities
                 WHERE Name = 'Zakynthos';
             ");
@@ -81,26 +76,24 @@ namespace TravelBooking.Data.Migrations
             // -------------------- Italia --------------------
             // Milano
             migrationBuilder.Sql(@"
-                INSERT INTO Destinations (Name, CityId, Description, PricePerNightPerPerson, Picture)
+                INSERT INTO Destinations (Name, CityId, Description, PricePerNightPerPerson)
                 SELECT
                     'H6',
                     CityId,
                     '',
-                    200.0,
-                    'f6.jpg'
+                    200.0
                 FROM Cities
                 WHERE Name = 'Milano';
             ");
 
             // Roma
             migrationBuilder.Sql(@"
-                INSERT INTO Destinations (Name, CityId, Description, PricePerNightPerPerson, Picture)
+                INSERT INTO Destinations (Name, CityId, Description, PricePerNightPerPerson)
                 SELECT
                     'H7',
                     CityId,
                     '',
-                    200.0,
-                    'f7.jpg'
+                    200.0
                 FROM Cities
                 WHERE Name = 'Roma';
             ");

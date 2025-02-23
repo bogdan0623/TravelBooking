@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Text;
 using TravelBooking.Models.DBObjects;
 using TravelBooking.Models.ViewModels;
 using TravelBooking.Repositories;
@@ -22,6 +23,16 @@ namespace TravelBooking.Factories
         {
             var city = _cityRepository.GetCityById(destination.CityId);
             var locationViewModel = _locationViewModelFactory.GetNewLocationViewModel(city);
+            var images = _destinationRepository.GetImages(destination.DestinationId);
+            var imagesNames = new List<string>();
+            var stringBuilder = new StringBuilder();
+            foreach (var image in images)
+            {
+                stringBuilder.Clear();
+                stringBuilder.Append("/images/");
+                stringBuilder.Append(image.Name);
+                imagesNames.Add(stringBuilder.ToString());
+            }            
 
             return new DestinationViewModel
             {
@@ -30,7 +41,7 @@ namespace TravelBooking.Factories
                 Location = locationViewModel.CityName + ", " + locationViewModel.CountryName,
                 Description = destination.Description,
                 PricePernightPerPerson = destination.PricePernightPerPerson.ToString("C", CultureInfo.GetCultureInfo("fr-FR")),
-                PicturePath = "/images/" + destination.Picture
+                ImagesNames = imagesNames
             };
         }
     }

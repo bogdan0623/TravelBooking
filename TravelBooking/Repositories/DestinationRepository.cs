@@ -17,6 +17,13 @@ namespace TravelBooking.Repositories
             return _context.Destinations.ToList();
         }
 
+        public IEnumerable<Image> GetImages(Guid id)
+        {
+            return _context.Images
+                .Where(i => _context.DestinationsImages
+                                .Any(di => di.DestinationId == id && di.ImageId == i.ImageId)).ToList();
+        }
+
         public Destination GetDestinationById(Guid id)
         {
             return _context.Destinations.FirstOrDefault(x => x.DestinationId == id);

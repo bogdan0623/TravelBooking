@@ -20,7 +20,6 @@ namespace TravelBooking.Data.Migrations
                     CityId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PricePerNightPerPerson = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Picture = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

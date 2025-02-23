@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using TravelBooking.Models.DBObjects;
 
 namespace TravelBooking.Models.ViewModels
 {
@@ -15,6 +16,6 @@ namespace TravelBooking.Models.ViewModels
 
         public string PricePernightPerPerson { get; set; }
 
-        public string PicturePath { get; set; }
+        public List<string> ImagesNames { get; set; }
     }
 }
