@@ -30,13 +30,16 @@ namespace TravelBooking.Controllers
         }
 
         // GET: DestinationController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(Guid id)
         {
             if (!User.Identity.IsAuthenticated)
             {
                 return Redirect("/Identity/Account/Login");
             }
-            return View();
+
+            var destinationViewModel = _destinationViewModelFactory.GetNewDestinationViewModel(
+                _destinationRepository.GetDestinationById(id)); 
+            return View(destinationViewModel);
         }
 
         // GET: DestinationController/Create

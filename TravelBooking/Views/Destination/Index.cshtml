@@ -4,28 +4,22 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Destinatii</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                Image
+                
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                Hotel
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Location)
+                Locatie
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PricePernightPerPerson)
+                Pret/Noapte/Persoana
             </th>            
             <th></th>
         </tr>
@@ -38,6 +32,7 @@
                 {
                     @* <img src="@item.PicturePath" width="100" /> *@
                     <img src="@Url.Content(item.PicturePath)" width="100" height="100" class="img-thumbnail" alt="Destination Image" />
+                    @* <img src="@Url.Content("/images/f1.jpg")" width="100" height="100" class="img-thumbnail" alt="Destination Image" /> *@
                 }
                 else
                 {
@@ -51,15 +46,10 @@
                 @Html.DisplayFor(modelItem => item.Location)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.PricePernightPerPerson)
             </td>            
             <td>
-                <a asp-action="Edit" asp-route-id="@item.DestinationId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.DestinationId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.DestinationId">Delete</a>
+                <a asp-action="Details" asp-route-id="@item.DestinationId">Details</a>
             </td>
         </tr>
 }
