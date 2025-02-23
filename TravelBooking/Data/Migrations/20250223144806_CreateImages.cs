@@ -16,11 +16,18 @@ namespace TravelBooking.Data.Migrations
                 columns: table => new
                 {
                     ImageId = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NewId()"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DestinationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false) 
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Images", x => x.ImageId);
+                    table.ForeignKey(
+                        "FK_Images_Destinations_DestinationId",
+                        column: x => x.DestinationId,
+                        principalTable: "Destinations",
+                        principalColumn: "DestinationId",
+                        onDelete: ReferentialAction.Cascade);
                 });
         }
 

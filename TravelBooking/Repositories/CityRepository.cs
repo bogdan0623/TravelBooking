@@ -17,6 +17,13 @@ namespace TravelBooking.Repositories
             return _context.Cities.ToList();
         }
 
+        public IEnumerable<City> GetCitiesByCountry(Guid countryId)
+        {
+            return _context.Cities
+                .Where(c => c.CountryId == countryId)
+                .ToList();
+        }
+
         public City GetCityById(Guid id)
         {
             return _context.Cities.FirstOrDefault(c => c.CityId == id);

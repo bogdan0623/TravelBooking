@@ -1,12 +1,15 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TravelBooking.Models;
+using TravelBooking.Models.ViewModels;
+using TravelBooking.Repositories;
 
 namespace TravelBooking.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<HomeController> _logger;        
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -16,7 +19,7 @@ namespace TravelBooking.Controllers
         public IActionResult Index()
         {
             return View();
-        }
+        }        
 
         public IActionResult Privacy()
         {

@@ -4,5 +4,6 @@
     {
         public Guid ImageId { get; set; }
         public string Name { get; set; }
+        public Guid DestinationId { get; set; }
     }
 }

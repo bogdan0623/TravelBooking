@@ -1,0 +1,79 @@
+﻿@using TravelBooking.Models.ViewModels
+@model DestinationSearchViewModel
+@{
+    ViewData["Title"] = "Search";
+    var countries = new SelectList(ViewBag.Countries, "CountryId", "Name");
+}
+
+<h1>Cauta o destinatie</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Search">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CountryId" class="control-label">Tara</label>
+                <select asp-for="CountryId" class="form-control" asp-items="countries" id="CountryDropdown">
+                    <option value="">Alege tara</option>
+                </select>
+                <span asp-validation-for="CountryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CityId" class="control-label">Oras</label>
+                <select asp-for="CityId" class="form-control" id="CityDropdown" disabled>
+                    <option value="">Alege orasul</option>
+                </select>
+                <span asp-validation-for="CityId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Search" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#CountryDropdown').change(function () {
+                var countryId = $(this).val();
+                if (countryId) {
+                    // Enable the city dropdown
+                    $('#CityDropdown').prop('disabled', false);
+
+                    // Make an AJAX request to get cities for the selected country
+                    $.ajax({
+                        url: '@Url.Action("GetCitiesByCountry", "Destination")', // Replace "YourController" with the actual controller name
+                        dataType: 'json',
+                        data: { countryId: countryId },
+                        success: function (data) {
+                            // Clear existing options in city dropdown
+                            console.log(data);
+                            $('#CityDropdown').empty();
+                            $('#CityDropdown').append('<option value="">Select a city</option>');
+
+                            // Populate the city dropdown with new options
+                            $.each(data, function (index, city) {
+                                $('#CityDropdown').append('<option value="' + city.cityId + '">' + city.name + '</option>');
+                            });
+                        },
+                        error: function () {
+                        $('#CityDropdown').empty();
+                        $('#CityDropdown').append('<option value="">Error loading cities</option>');
+                    }
+                    });
+                } else {
+                    // Disable the city dropdown if no country is selected
+                    $('#CityDropdown').prop('disabled', true);
+                    $('#CityDropdown').empty();
+                    $('#CityDropdown').append('<option value="">Select a city</option>');
+                }
+            });
+        });
+    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }    
+}

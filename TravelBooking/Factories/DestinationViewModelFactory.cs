@@ -11,19 +11,21 @@ namespace TravelBooking.Factories
         private readonly DestinationRepository _destinationRepository;
         private readonly CityRepository _cityRepository;
         private readonly LocationViewModelFactory _locationViewModelFactory;
+        private readonly ImageRepository _imageRepository;
 
-        public DestinationViewModelFactory(DestinationRepository destinationRepository, CityRepository cityRepository, LocationViewModelFactory locationViewModelFactory)
+        public DestinationViewModelFactory(DestinationRepository destinationRepository, CityRepository cityRepository, LocationViewModelFactory locationViewModelFactory, ImageRepository imageRepository)
         {
             _destinationRepository = destinationRepository;
             _cityRepository = cityRepository;
             _locationViewModelFactory = locationViewModelFactory;
+            _imageRepository = imageRepository;
         }
 
         public DestinationViewModel GetNewDestinationViewModel(Destination destination)
         {
             var city = _cityRepository.GetCityById(destination.CityId);
             var locationViewModel = _locationViewModelFactory.GetNewLocationViewModel(city);
-            var images = _destinationRepository.GetImages(destination.DestinationId);
+            var images = _imageRepository.GetImagesByDestination(destination);
             var imagesNames = new List<string>();
             var stringBuilder = new StringBuilder();
             foreach (var image in images)
@@ -32,7 +34,9 @@ namespace TravelBooking.Factories
                 stringBuilder.Append("/images/");
                 stringBuilder.Append(image.Name);
                 imagesNames.Add(stringBuilder.ToString());
-            }            
+            }
+            
+            imagesNames.Sort();
 
             return new DestinationViewModel
             {
@@ -40,7 +44,7 @@ namespace TravelBooking.Factories
                 Name = destination.Name,
                 Location = locationViewModel.CityName + ", " + locationViewModel.CountryName,
                 Description = destination.Description,
-                PricePernightPerPerson = destination.PricePernightPerPerson.ToString("C", CultureInfo.GetCultureInfo("fr-FR")),
+                PricePernightPerPerson = destination.PricePernightPerPerson.ToString("C", CultureInfo.GetCultureInfo("ro-RO")),
                 ImagesNames = imagesNames
             };
         }

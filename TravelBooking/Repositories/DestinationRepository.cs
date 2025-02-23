@@ -17,11 +17,11 @@ namespace TravelBooking.Repositories
             return _context.Destinations.ToList();
         }
 
-        public IEnumerable<Image> GetImages(Guid id)
+        public IEnumerable<Destination> GetDestinationsByLocation(string cityName)
         {
-            return _context.Images
-                .Where(i => _context.DestinationsImages
-                                .Any(di => di.DestinationId == id && di.ImageId == i.ImageId)).ToList();
+            var city = _context.Cities.FirstOrDefault(c => c.Name == cityName);
+            return _context.Destinations
+                .Where(x => x.CityId == city.CityId).ToList();
         }
 
         public Destination GetDestinationById(Guid id)

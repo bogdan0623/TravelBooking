@@ -17,7 +17,6 @@ namespace TravelBooking.Data
         public DbSet<City> Cities { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Destination> Destinations { get; set; }
-        public DbSet<DestinationImage> DestinationsImages { get; set; }
         public DbSet<Image> Images { get; set; }
     }
 }

@@ -49,7 +49,7 @@
                 @Html.DisplayFor(modelItem => item.PricePernightPerPerson)
             </td>            
             <td>
-                <a asp-action="Details" asp-route-id="@item.DestinationId">Details</a>
+                <a asp-action="Details" asp-route-id="@item.DestinationId" asp-route-cityName="@ViewBag.CityName">Details</a>
             </td>
         </tr>
 }
