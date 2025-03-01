@@ -3,8 +3,11 @@
     public class BookingViewModel
     {
         public Guid BookingId { get; set; }
-        public CustomerViewModel Customer { get; set; }
-        public DestinationViewModel Destination { get; set; }
+        public string CustomerName { get; set; }
+        public string CustomerEmail { get; set; }
+        public string CustomerPhone { get; set; }
+        public string DestinationName { get; set; }
+        public string DestinationLocation { get; set; }
         public DateTime CheckIn { get; set; }
         public DateTime CheckOut { get; set; }
         public DateTime CreatedDate { get; set; }
