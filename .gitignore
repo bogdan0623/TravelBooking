@@ -54,7 +54,10 @@ Thumbs.db
 Desktop.ini
 
 #Ignore project files
-wwwroot/
+css/
+js/
+lib/
+favicon.ico
 *.csproj
 ScaffoldingReadMe.txt
 TravelBooking/appsettings.json
