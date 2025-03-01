@@ -7,10 +7,15 @@
 @* Hello @(customer?.Name ?? "Unknown")! *@
 
 <ul class="navbar-nav">
-    @if (SignInManager.IsSignedIn(User))
-    {
-        var customer = _factory.GetNewCustomerViewModel(User.Identity.Name);
-        <li class="nav-item">
+@if (SignInManager.IsSignedIn(User))
+{
+    var customer = _factory.GetNewCustomerViewModel(User.Identity.Name);
+    <li class="nav-item">
+        @* <a class="nav-link text-dark" asp-area="Booking" asp-page="/GetUserBookings/68fac6a3-b83b-414c-9c4e-eb42b6cc78cd" title="Manage">My Bookings</a> *@
+        <a class="nav-link text-dark" asp-controller="Booking" asp-action="GetUserBookings" asp-route-id="@customer.CustomerId" title="Manage">My Bookings</a>
+
+    </li>
+    <li class="nav-item">
         <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">My Account</a>
     </li>
     <li class="nav-item">

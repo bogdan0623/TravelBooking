@@ -1,7 +1,10 @@
-﻿namespace TravelBooking.Models.ViewModels
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace TravelBooking.Models.ViewModels
 {
     public class BookingViewModel
     {
+        [Key]
         public Guid BookingId { get; set; }
         public string CustomerName { get; set; }
         public string CustomerEmail { get; set; }

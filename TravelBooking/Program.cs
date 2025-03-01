@@ -27,6 +27,7 @@ builder.Services.AddTransient<CustomerRepository>();
 builder.Services.AddTransient<CustomerViewModelFactory>();
 builder.Services.AddTransient<DestinationViewModelFactory>();
 builder.Services.AddTransient<LocationViewModelFactory>();
+builder.Services.AddTransient<BookingViewModelFactory>();
 
 var app = builder.Build();
 
