@@ -7,6 +7,7 @@
         public Guid DestinationId { get; set; }
         public DateTime CheckIn { get; set; }
         public DateTime CheckOut { get; set; }
+        public DateTime CreatedDate { get; set; }
         public int StatusId { get; set; }
         public decimal Price { get; set; }
         public int NumberOfPersons { get; set; }

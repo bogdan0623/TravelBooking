@@ -18,5 +18,6 @@ namespace TravelBooking.Data
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Destination> Destinations { get; set; }
         public DbSet<Image> Images { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
     }
 }

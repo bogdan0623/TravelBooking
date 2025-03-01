@@ -21,6 +21,7 @@ builder.Services.AddTransient<StatusRepository>();
 builder.Services.AddTransient<CountryRepository>();
 builder.Services.AddTransient<CityRepository>();
 builder.Services.AddTransient<DestinationRepository>();
+builder.Services.AddTransient<BookingRepository>();
 builder.Services.AddTransient<ImageRepository>();
 builder.Services.AddTransient<CustomerRepository>();
 builder.Services.AddTransient<CustomerViewModelFactory>();

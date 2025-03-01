@@ -19,6 +19,7 @@ namespace TravelBooking.Data.Migrations
                     DestinationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CheckIn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CheckOut = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     StatusId = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     NumberOfPersons = table.Column<int>(type: "int", nullable: false)
