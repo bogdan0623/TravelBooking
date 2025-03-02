@@ -15,7 +15,7 @@ namespace TravelBooking.Models.ViewModels
         public DateTime CheckOut { get; set; }
         public DateTime CreatedDate { get; set; }
         public string Status { get; set; }
-        public decimal Price { get; set; }
+        public string Price { get; set; }
         public int NumberOfPersons { get; set; }
     }
 }

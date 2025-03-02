@@ -1,4 +1,5 @@
-﻿using TravelBooking.Models.DBObjects;
+﻿using System.Globalization;
+using TravelBooking.Models.DBObjects;
 using TravelBooking.Models.ViewModels;
 using TravelBooking.Repositories;
 
@@ -47,7 +48,7 @@ namespace TravelBooking.Factories
                 CheckOut = booking.CheckOut,
                 CreatedDate = booking.CreatedDate,
                 Status = status.Value,
-                Price = booking.Price,
+                Price = booking.Price.ToString("C", CultureInfo.GetCultureInfo("ro-RO")),
                 NumberOfPersons = booking.NumberOfPersons
             };
         }

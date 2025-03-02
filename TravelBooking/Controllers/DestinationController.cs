@@ -15,13 +15,15 @@ namespace TravelBooking.Controllers
         private readonly DestinationViewModelFactory _destinationViewModelFactory;
         private readonly CountryRepository _countryRepository;
         private readonly CityRepository _cityRepository;
+        private readonly CustomerRepository _customerRepository;
 
-        public DestinationController(DestinationRepository destinationRepository, DestinationViewModelFactory destinationViewModelFactory, CountryRepository countryRepository, CityRepository cityRepository)
+        public DestinationController(DestinationRepository destinationRepository, DestinationViewModelFactory destinationViewModelFactory, CountryRepository countryRepository, CityRepository cityRepository, CustomerRepository customerRepository)
         {
             _destinationRepository = destinationRepository;
             _destinationViewModelFactory = destinationViewModelFactory;
             _countryRepository = countryRepository;
             _cityRepository = cityRepository;
+            _customerRepository = customerRepository;
         }
 
         // GET: DestinationController
@@ -96,6 +98,8 @@ namespace TravelBooking.Controllers
             var destinationViewModel = _destinationViewModelFactory.GetNewDestinationViewModel(
                 _destinationRepository.GetDestinationById(id)); 
             ViewBag.CityName = cityName;
+            var email = User.Identity.Name;
+            ViewBag.Customer = _customerRepository.GetCustomerByEmail(email);
             return View(destinationViewModel);
         }
 

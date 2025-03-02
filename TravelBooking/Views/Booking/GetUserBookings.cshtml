@@ -4,46 +4,43 @@
     ViewData["Title"] = "GetUserBookings";
 }
 
-<h1>GetUserBookings</h1>
+<h1>Rezervarile mele</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.CustomerName)
+                Nume
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CustomerEmail)
+                Email
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CustomerPhone)
+                Telefon
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DestinationName)
+                Hotel
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DestinationLocation)
+                Locatie
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CheckIn)
+                Check-in
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CheckOut)
+                Check-out
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CreatedDate)
+                Data rezervarii
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Status)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Price)
+                Total
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NumberOfPersons)
+                Numar de persoane
             </th>
             <th></th>
         </tr>

@@ -22,6 +22,11 @@ namespace TravelBooking.Repositories
             return _context.Statuses.FirstOrDefault(s => s.StatusId == id);
         }
 
+        public Status GetStatusByValue(string status)
+        {
+            return _context.Statuses.FirstOrDefault(s => s.Value == status);
+        }
+
         public void AddStatus(Status status)
         {
             _context.Statuses.Add(status);

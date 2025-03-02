@@ -51,7 +51,13 @@
         </div>
         <div class="card-footer text-center"> 
              <a class="btn btn-secondary" asp-action="Index" asp-route-cityName="@ViewBag.CityName">Back to List</a> 
-         </div>
+        </div>
+        <div class="card-footer text-center">
+            <a class="btn btn-secondary" asp-controller="Booking" asp-action="CreateMyBooking" asp-route-cityName="@ViewBag.CityName"
+               asp-route-customerId="@ViewBag.Customer.CustomerId" asp-route-destinationId="@Model.DestinationId">
+                Rezerva
+            </a>
+        </div>
     </div>
 </div>
 

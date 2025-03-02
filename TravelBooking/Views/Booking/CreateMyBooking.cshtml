@@ -1,0 +1,60 @@
+﻿@model TravelBooking.Models.DBObjects.Booking
+
+@{
+    ViewData["Title"] = "CreateMyBooking";
+}
+
+<h1>CreateMyBooking</h1>
+
+<h4>Booking</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateMyBooking">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CustomerId" class="control-label">Nume</label>
+                <input readonly class="form-control" value="@ViewBag.CustomerViewModel.Name" />
+                <input hidden asp-for="CustomerId" class="form-control" value="@ViewBag.Customer.CustomerId"/>
+                <span asp-validation-for="CustomerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Email</label>
+                <input readonly class="form-control" value="@ViewBag.CustomerViewModel.Email" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Telefon</label>
+                <input readonly class="form-control" value="@ViewBag.CustomerViewModel.Phone" />
+            </div>
+            <div class="form-group">
+                <label asp-for="DestinationId" class="control-label">Hotel</label>
+                <input readonly class="form-control" value="@ViewBag.DestinationViewModel.Name"/>
+                <input hidden asp-for="DestinationId" class="form-control" value="@ViewBag.Destination.DestinationId"/>
+                <span asp-validation-for="DestinationId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Locatie</label>
+                <input readonly class="form-control" value="@ViewBag.DestinationViewModel.Location" />
+            </div>
+            <div class="form-group">
+                <label asp-for="CheckIn" class="control-label">Check-in</label>
+                <input asp-for="CheckIn" class="form-control" />
+                <span asp-validation-for="CheckIn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CheckOut" class="control-label">Check-out</label>
+                <input asp-for="CheckOut" class="form-control" />
+                <span asp-validation-for="CheckOut" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumberOfPersons" class="control-label">Numar de persoane</label>
+                <input asp-for="NumberOfPersons" class="form-control" />
+                <span asp-validation-for="NumberOfPersons" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Rezerva" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
