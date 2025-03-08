@@ -19,7 +19,7 @@ namespace TravelBooking.Models.ViewModels
         public string DestinationLocation { get; set; }
 
         public DateTime CheckIn { get; set; }
-        
+
         public DateTime CheckOut { get; set; }
 
         public DateTime CreatedDate { get; set; }

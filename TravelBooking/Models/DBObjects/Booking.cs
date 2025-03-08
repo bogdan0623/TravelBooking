@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace TravelBooking.Models.DBObjects
 {
@@ -10,9 +11,12 @@ namespace TravelBooking.Models.DBObjects
 
         public Guid DestinationId { get; set; }
 
+        [Required]
+        [Remote(action: "ValidateDates", controller: "Booking", AdditionalFields = nameof(CheckOut))]
         public DateTime CheckIn { get; set; }
 
-        //[Remote(action: "ValidateCheckOut", controller: "Booking", AdditionalFields = $"{nameof(CheckIn)}")]
+        [Required]
+        [Remote(action: "ValidateDates", controller: "Booking", AdditionalFields = nameof(CheckIn))]
         public DateTime CheckOut { get; set; }
 
         public DateTime CreatedDate { get; set; }
@@ -21,6 +25,7 @@ namespace TravelBooking.Models.DBObjects
 
         public decimal Price { get; set; }
 
+        [Required]
         public int NumberOfPersons { get; set; }
     }
 }

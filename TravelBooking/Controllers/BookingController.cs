@@ -98,47 +98,72 @@ namespace TravelBooking.Controllers
         public ActionResult CreateMyBooking(IFormCollection collection)
         {
             try
+            {                
+                var booking = new Booking();
+                booking.BookingId = Guid.NewGuid();
+                booking.CustomerId = Guid.Parse(collection["CustomerId"]);
+                booking.DestinationId = Guid.Parse(collection["DestinationId"]);
+
+                var checkIn = GetNullOrValidDateTime(collection["CheckIn"]);
+                if(checkIn == null)
+                {
+                    ModelState.AddModelError("CheckIn", "Check-in date is not valid!");
+                    throw new Exception("Check-in date is not valid!");
+                }
+                booking.CheckIn = checkIn.Value;
+
+                var checkOut = GetNullOrValidDateTime(collection["CheckOut"]);
+                if (checkOut == null)
+                {
+                    ModelState.AddModelError("CheckOut", "Check-out date is not valid!");
+                    throw new Exception("Check-out date is not valid!");
+                }
+                booking.CheckOut = checkOut.Value;
+
+                booking.CreatedDate = DateTime.Now;
+                booking.StatusId = _statusRepository.GetStatusByValue("Pending").StatusId;
+
+                if (string.IsNullOrWhiteSpace(collection["NumberOfPersons"]))
+                {
+                    ModelState.AddModelError("NumberOfPersons", "This field is required.");
+                    throw new Exception("The NumberOfPersons field is required.");
+                }
+
+                if (booking.CheckIn >= booking.CheckOut)
+                {
+                    ModelState.AddModelError("CheckOut", "Check-out date must be after check-in date!");
+                    throw new Exception("Check-out date must be after check-in date!");
+                }
+
+                booking.NumberOfPersons = int.Parse(collection["NumberOfPersons"]);
+
+                var destination = _destinationRepository.GetDestinationById(booking.DestinationId);
+                var destinationPrice = destination.PricePernightPerPerson;
+                var numberOfNights = (booking.CheckOut - booking.CheckIn).Days;
+                var totalPrice = destinationPrice * numberOfNights * booking.NumberOfPersons;                
+
+                var customer = _customerRepository.GetCustomerById(booking.CustomerId);
+                var customerViewModel = _customerViewModelFactory.GetNewCustomerViewModel(customer);
+                var destinationViewModel = _destinationViewModelFactory.GetNewDestinationViewModel(destination);                
+
+                booking.Price = totalPrice;
+                _bookingRepository.AddBooking(booking);
+                return RedirectToAction("GetUserBookings", new { id = booking.CustomerId });
+            }
+            catch(Exception)
             {
+                var customerId = Guid.Parse(collection["CustomerId"]);
                 var destinationId = Guid.Parse(collection["DestinationId"]);
                 var destination = _destinationRepository.GetDestinationById(destinationId);
-                var destinationPrice = destination.PricePernightPerPerson;
-                var numberOfPersons = int.Parse(collection["NumberOfPersons"]);
-                var checkIn = DateTime.Parse(collection["CheckIn"]);
-                var checkOut = DateTime.Parse(collection["CheckOut"]);
-                var numberOfNights = (checkOut - checkIn).Days;
-                var totalPrice = destinationPrice * numberOfNights * numberOfPersons;
-                var customerId = Guid.Parse(collection["CustomerId"]);
 
                 var customer = _customerRepository.GetCustomerById(customerId);
                 var customerViewModel = _customerViewModelFactory.GetNewCustomerViewModel(customer);
                 var destinationViewModel = _destinationViewModelFactory.GetNewDestinationViewModel(destination);
-                if (checkIn >=  checkOut)
-                {
-                    ModelState.AddModelError("CheckOut", "Check-out date must be after check-in date!");
-                    ViewBag.Customer = customer;
-                    ViewBag.CustomerViewModel = customerViewModel;
-                    ViewBag.Destination = destination;
-                    ViewBag.DestinationViewModel = destinationViewModel;
-                    return View();
-                }                
-                var booking = new Booking
-                {
-                    BookingId = Guid.NewGuid(),
-                    CustomerId = customerId,
-                    DestinationId = destinationId,
-                    CheckIn = checkIn,
-                    CheckOut = checkIn,
-                    CreatedDate = DateTime.Now,
-                    StatusId = _statusRepository.GetStatusByValue("Pending").StatusId,
-                    Price = totalPrice,
-                    NumberOfPersons = numberOfPersons
-                };
-                _bookingRepository.AddBooking(booking);
-                return RedirectToAction("GetUserBookings", new { id = customerId });
-            }
-            catch
-            {
-                
+
+                ViewBag.Customer = customer;
+                ViewBag.CustomerViewModel = customerViewModel;
+                ViewBag.Destination = destination;
+                ViewBag.DestinationViewModel = destinationViewModel;
                 return View();
             }
         }
@@ -187,12 +212,22 @@ namespace TravelBooking.Controllers
         }
 
         //[AcceptVerbs("GET", "POST")]
-        //public ActionResult ValidateCheckOut(string CheckIn, string CheckOut)
+        //public ActionResult ValidateDates(string CheckIn, string CheckOut)
         //{
         //    var start = GetNullOrValidDateTime(CheckIn);
         //    var end = GetNullOrValidDateTime(CheckOut);
 
-        //    if(start != null && end != null && start > end)
+        //    if(start == null)
+        //    {
+        //        return Json("Check-in is invalid!");
+        //    }
+
+        //    if (end == null)
+        //    {
+        //        return Json("Check-out is invalid!");
+        //    }
+
+        //    if (start > end)
         //    {
         //        return Json("Check-out date must be after check-in date!");
         //    }
@@ -200,15 +235,15 @@ namespace TravelBooking.Controllers
         //    return Json(true);
         //}
 
-        //private DateTime? GetNullOrValidDateTime(string dateTimeString)
-        //{
-        //    if (string.IsNullOrWhiteSpace(dateTimeString))
-        //    {
-        //        return null;
-        //    }
+        private DateTime? GetNullOrValidDateTime(string dateTimeString)
+        {
+            if (string.IsNullOrWhiteSpace(dateTimeString))
+            {
+                return null;
+            }
 
-        //    var isValid = DateTime.TryParse(dateTimeString, out var result);
-        //    return isValid ? result : null;
-        //}
+            var isValid = DateTime.TryParse(dateTimeString, out var result);
+            return isValid ? result : null;
+        }
     }
 }
