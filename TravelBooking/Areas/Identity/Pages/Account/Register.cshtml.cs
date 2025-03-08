@@ -73,16 +73,20 @@ namespace TravelBooking.Areas.Identity.Pages.Account
         [BindProperty]
         [Required]
         [Display(Name = "First Name")]
+        [RegularExpression(@"^[A-Za-z]+(-[A-Za-z]+)*$", ErrorMessage = "First name can only contain letters and hyphens, but cannot end with a hyphen.")]
         public string FirstName { get; set; }
 
         [BindProperty]
         [Required]
         [Display(Name = "Last Name")]
+        [RegularExpression(@"^[A-Za-z]+(-[A-Za-z]+)*$", ErrorMessage = "Last name can only contain letters and hyphens, but cannot end with a hyphen.")]
         public string LastName { get; set; }
 
         [BindProperty]
         [Required]
+        [Phone]
         [Display(Name = "Phone")]
+        [RegularExpression(@"^0\d{9}$", ErrorMessage = "Phone number must start with 0 and be 10 digits long.")]
         public string Phone { get; set; }
 
         /// <summary>

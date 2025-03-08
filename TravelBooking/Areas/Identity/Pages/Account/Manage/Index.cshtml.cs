@@ -49,11 +49,15 @@ namespace TravelBooking.Areas.Identity.Pages.Account.Manage
         public Customer Customer { get; set; }
 
         [BindProperty]
+        [Required]
         [Display(Name = "First Name")]
+        [RegularExpression(@"^[A-Za-z]+(-[A-Za-z]+)*$", ErrorMessage = "First name can only contain letters and hyphens, but cannot end with a hyphen.")]
         public string FirstName { get; set; }
 
         [BindProperty]
+        [Required]
         [Display(Name = "Last Name")]
+        [RegularExpression(@"^[A-Za-z]+(-[A-Za-z]+)*$", ErrorMessage = "Last name can only contain letters and hyphens, but cannot end with a hyphen.")]
         public string LastName { get; set; }
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -73,7 +77,9 @@ namespace TravelBooking.Areas.Identity.Pages.Account.Manage
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Phone]
+            [Required]
             [Display(Name = "Phone number")]
+            [RegularExpression(@"^0\d{9}$", ErrorMessage = "Phone number must start with 0 and be 10 digits long.")]
             public string PhoneNumber { get; set; }
         }
 

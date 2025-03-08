@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace TravelBooking.Models.ViewModels
 {
@@ -6,16 +7,28 @@ namespace TravelBooking.Models.ViewModels
     {
         [Key]
         public Guid BookingId { get; set; }
+
         public string CustomerName { get; set; }
+
         public string CustomerEmail { get; set; }
+
         public string CustomerPhone { get; set; }
+
         public string DestinationName { get; set; }
+
         public string DestinationLocation { get; set; }
+
         public DateTime CheckIn { get; set; }
+        
         public DateTime CheckOut { get; set; }
+
         public DateTime CreatedDate { get; set; }
+
         public string Status { get; set; }
+
         public string Price { get; set; }
+
         public int NumberOfPersons { get; set; }
+
     }
 }
