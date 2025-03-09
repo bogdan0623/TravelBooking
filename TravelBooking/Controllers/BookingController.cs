@@ -51,9 +51,12 @@ namespace TravelBooking.Controllers
         }
 
         // GET: BookingController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(Guid id)
         {
-            return View();
+            var booking = _bookingRepository.GetBookingById(id);
+            var bookingViewModel = _bookingViewModelFactory.GetBookingViewModel(booking);
+            ViewBag.CustomerId = booking.CustomerId;
+            return View(bookingViewModel);
         }
 
         // GET: BookingController/Create
@@ -244,20 +247,24 @@ namespace TravelBooking.Controllers
         }
 
         // GET: BookingController/Delete/5
-        [Authorize(Roles = "Admin")]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(Guid id)
         {
-            return View();
+            var booking = _bookingRepository.GetBookingById(id);
+            var bookingViewModel = _bookingViewModelFactory.GetBookingViewModel(booking);
+            return View(bookingViewModel);
         }
 
         // POST: BookingController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(Guid id, IFormCollection collection)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var booking = _bookingRepository.GetBookingById(id);
+                var customerId = booking.CustomerId;
+                _bookingRepository.DeleteBooking(id);
+                return RedirectToAction("GetUserBookings", new { id = customerId });
             }
             catch
             {

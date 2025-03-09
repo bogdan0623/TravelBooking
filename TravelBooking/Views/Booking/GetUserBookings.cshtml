@@ -13,12 +13,6 @@
                 Nume
             </th>
             <th>
-                Email
-            </th>
-            <th>
-                Telefon
-            </th>
-            <th>
                 Hotel
             </th>
             <th>
@@ -31,20 +25,14 @@
                 Check-out
             </th>
             <th>
-                Data rezervarii
-            </th>
-            <th>
-                Data modificarii
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                Total
             </th>
             <th>
                 Numar de persoane
             </th>
+            <th>
+                Total
+            </th>            
             <th></th>
         </tr>
     </thead>
@@ -53,12 +41,6 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.CustomerName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CustomerEmail)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CustomerPhone)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DestinationName)
@@ -73,20 +55,14 @@
                 @Html.DisplayFor(modelItem => item.CheckOut)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CreatedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastModifiedDate)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.NumberOfPersons)
             </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>            
             <td>
                 <a asp-action="Edit" asp-route-id="@item.BookingId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.BookingId">Details</a> |
