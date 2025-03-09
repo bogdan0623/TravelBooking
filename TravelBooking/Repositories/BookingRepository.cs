@@ -20,6 +20,11 @@ namespace TravelBooking.Repositories
                 .ToList();
         }
 
+        public Booking GetBookingById(Guid id)
+        {
+            return _context.Bookings.FirstOrDefault(b => b.BookingId == id);
+        }
+
         public void AddBooking(Booking booking)
         {
             _context.Bookings.Add(booking);

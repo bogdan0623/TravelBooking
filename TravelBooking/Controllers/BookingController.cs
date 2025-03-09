@@ -171,23 +171,75 @@ namespace TravelBooking.Controllers
         }
 
         // GET: BookingController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(Guid id)
         {
-            return View();
+            var booking = _bookingRepository.GetBookingById(id);
+            var bookingViewModel = _bookingViewModelFactory.GetBookingViewModel(booking);
+
+            var destination = _destinationRepository.GetDestinationById(booking.DestinationId);
+            ViewBag.Destination = destination;
+
+            return View(bookingViewModel);
         }
 
         // POST: BookingController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Guid id, IFormCollection collection)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var booking = _bookingRepository.GetBookingById(id);
+
+                var checkIn = GetNullOrValidDateTime(collection["CheckIn"]);
+                var checkOut = GetNullOrValidDateTime(collection["CheckOut"]);
+                if (checkIn == null)
+                {
+                    ModelState.AddModelError("CheckIn", "Check-in date is not valid!");
+                    throw new Exception("Check-in date is not valid!");
+                }
+                if (checkOut == null)
+                {
+                    ModelState.AddModelError("CheckOut", "Check-out date is not valid!");
+                    throw new Exception("Check-out date is not valid!");
+                }
+                if (checkIn >= checkOut)
+                {
+                    ModelState.AddModelError("CheckOut", "Check-out date must be after check-in date!");
+                    throw new Exception("Check-out date must be after check-in date!");
+                }
+
+                if (string.IsNullOrWhiteSpace(collection["NumberOfPersons"]))
+                {
+                    ModelState.AddModelError("NumberOfPersons", "This field is required.");
+                    throw new Exception("The NumberOfPersons field is required.");
+                }
+                var isValid = int.TryParse(collection["NumberOfPersons"], out var numberOfPersons);
+                if(!isValid || (isValid && numberOfPersons <= 0))
+                {
+                    ModelState.AddModelError("NumberOfPersons", "This field is invalid.");
+                    throw new Exception("The NumberOfPersons field is invalid.");
+                }
+
+
+                booking.CheckIn = checkIn.Value;
+                booking.CheckOut = checkOut.Value;
+                booking.LastModifiedDate = DateTime.Now;
+                booking.StatusId = _statusRepository.GetStatusByValue("Pending").StatusId;
+                booking.NumberOfPersons = numberOfPersons;
+                booking.Price = decimal.Parse(collection["Price"]);
+                _bookingRepository.UpdateBooking(booking);
+
+                return RedirectToAction("GetUserBookings", new { id = booking.CustomerId });
             }
-            catch
+            catch(Exception e)
             {
-                return View();
+                var booking = _bookingRepository.GetBookingById(id);
+                var bookingViewModel = _bookingViewModelFactory.GetBookingViewModel(booking);
+
+                var destination = _destinationRepository.GetDestinationById(booking.DestinationId);
+                ViewBag.Destination = destination;
+                return View(bookingViewModel);
             }
         }
 
@@ -219,7 +271,7 @@ namespace TravelBooking.Controllers
         //    var start = GetNullOrValidDateTime(CheckIn);
         //    var end = GetNullOrValidDateTime(CheckOut);
 
-        //    if(start == null)
+        //    if (start == null)
         //    {
         //        return Json("Check-in is invalid!");
         //    }

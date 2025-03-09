@@ -18,8 +18,12 @@ namespace TravelBooking.Models.ViewModels
 
         public string DestinationLocation { get; set; }
 
+        [Required]
+        [Remote(action: "ValidateDates", controller: "Booking", AdditionalFields = nameof(CheckIn))]
         public DateTime CheckIn { get; set; }
 
+        [Required]
+        [Remote(action: "ValidateDates", controller: "Booking", AdditionalFields = nameof(CheckOut))]
         public DateTime CheckOut { get; set; }
 
         public DateTime CreatedDate { get; set; }
@@ -30,6 +34,7 @@ namespace TravelBooking.Models.ViewModels
 
         public string Price { get; set; }
 
+        [Required]
         public int NumberOfPersons { get; set; }
 
     }
