@@ -120,7 +120,9 @@ namespace TravelBooking.Controllers
                 }
                 booking.CheckOut = checkOut.Value;
 
-                booking.CreatedDate = DateTime.Now;
+                var now = DateTime.Now;
+                booking.CreatedDate = now;
+                booking.LastModifiedDate = now;
                 booking.StatusId = _statusRepository.GetStatusByValue("Pending").StatusId;
 
                 if (string.IsNullOrWhiteSpace(collection["NumberOfPersons"]))

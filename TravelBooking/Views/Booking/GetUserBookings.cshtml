@@ -34,6 +34,9 @@
                 Data rezervarii
             </th>
             <th>
+                Data modificarii
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Status)
             </th>
             <th>
@@ -73,6 +76,9 @@
                 @Html.DisplayFor(modelItem => item.CreatedDate)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.LastModifiedDate)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
@@ -83,7 +89,8 @@
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.BookingId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.BookingId">Details</a>
+                <a asp-action="Details" asp-route-id="@item.BookingId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.BookingId">Delete</a>
             </td>
         </tr>
 }

@@ -24,6 +24,8 @@ namespace TravelBooking.Models.ViewModels
 
         public DateTime CreatedDate { get; set; }
 
+        public DateTime LastModifiedDate { get; set; }
+
         public string Status { get; set; }
 
         public string Price { get; set; }

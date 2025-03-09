@@ -47,6 +47,7 @@ namespace TravelBooking.Factories
                 CheckIn = booking.CheckIn,
                 CheckOut = booking.CheckOut,
                 CreatedDate = booking.CreatedDate,
+                LastModifiedDate = booking.LastModifiedDate,
                 Status = status.Value,
                 Price = booking.Price.ToString("C", CultureInfo.GetCultureInfo("ro-RO")),
                 NumberOfPersons = booking.NumberOfPersons
