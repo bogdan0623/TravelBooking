@@ -55,7 +55,9 @@ namespace TravelBooking.Controllers
         {
             var booking = _bookingRepository.GetBookingById(id);
             var bookingViewModel = _bookingViewModelFactory.GetBookingViewModel(booking);
+            var numberOfNights = (booking.CheckOut - booking.CheckIn).Days;
             ViewBag.CustomerId = booking.CustomerId;
+            ViewBag.NumberOfNights = numberOfNights;
             return View(bookingViewModel);
         }
 
