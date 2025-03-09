@@ -5,7 +5,7 @@ namespace TravelBooking.Repositories
 {
     public class CityRepository
     {
-        private ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
         public CityRepository(ApplicationDbContext context)
         {

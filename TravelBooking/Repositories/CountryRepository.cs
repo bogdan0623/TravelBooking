@@ -5,9 +5,9 @@ namespace TravelBooking.Repositories
 {
     public class CountryRepository
     {
-        private ApplicationDbContext _context;
+        private IApplicationDbContext _context;
 
-        public CountryRepository(ApplicationDbContext context)
+        public CountryRepository(IApplicationDbContext context)
         {
             _context = context;
         }
