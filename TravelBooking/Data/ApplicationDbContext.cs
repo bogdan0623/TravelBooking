@@ -19,6 +19,6 @@ namespace TravelBooking.Data
         public DbSet<Destination> Destinations { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<Booking> Bookings { get; set; }
-        public DbSet<TravelBooking.Models.ViewModels.BookingViewModel> BookingViewModel { get; set; } = default!;
+        public DbSet<BookingViewModel> BookingViewModel { get; set; } = default!;
     }
 }
