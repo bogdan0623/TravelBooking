@@ -4,26 +4,25 @@
     ViewData["Title"] = "Details";
 }
 
-
 <div class="container my-5">
-    <div class="card mx-auto" style="max-width: 60%;">
+    <div class="card mx-auto shadow-lg" style="max-width: 75%; border-radius: 15px;">
         <div class="card-body">
-            <h1 class ="card-title text-center">@Model.Name</h1>
-            <h4 class="card-title text-center">@Model.Location</h4>
+            <h1 class="card-title text-center text-primary">@Model.Name</h1>
+            <h4 class="card-title text-center text-muted">@Model.Location</h4>
             <hr />
             <dl class="row">
                 <dd class="col-sm-12">
-                    <div id="carouselExample" class="carousel slide" style="max-width: 100%; margin: 0 auto;">
+                    <div id="carouselExample" class="carousel slide" style="max-width: 75%; margin: 0 auto;">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <img src="@Url.Content(Model.ImagesNames[0])" class="d-block w-100 carousel-img" alt="Destination Image" />
                             </div>
-                            @for(var i = 1; i < Model.ImagesNames.Count; i++)
+                            @for (var i = 1; i < Model.ImagesNames.Count; i++)
                             {
                                 <div class="carousel-item">
                                     <img src="@Url.Content(Model.ImagesNames[i])" class="d-block w-100 carousel-img" alt="Destination Image" />
                                 </div>
-                            }                            
+                            }
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -35,27 +34,27 @@
                         </button>
                     </div>
                 </dd>
-                <dt class="col-sm-22">
+                <dt class="col-sm-12 text-uppercase font-weight-bold">
                     Descriere
                 </dt>
-                <dd class="col-sm-12">
+                <dd class="col-sm-12 text-justify">
                     @Html.Raw(Model.Description.Replace("\r\n", "<br/>").Replace("\n", "<br/>"))
                 </dd>
-                <dt class="col-sm-12">
+                <dt class="col-sm-12 text-uppercase font-weight-bold">
                     Pret/Noapte/Persoana
                 </dt>
-                <dd class="col-sm-12">
+                <dd class="col-sm-12 text-success font-weight-bold">
                     @Html.DisplayFor(model => model.PricePernightPerPerson)
                 </dd>
             </dl>
         </div>
-        <div class="card-footer text-center"> 
-             <a class="btn btn-secondary" asp-action="Index" asp-route-cityName="@ViewBag.CityName">Back to List</a> 
-        </div>
-        <div class="card-footer text-center">
-            <a class="btn btn-secondary" asp-controller="Booking" asp-action="CreateMyBooking" asp-route-cityName="@ViewBag.CityName"
+        <div class="card-footer text-center d-flex justify-content-around">
+            <a class="btn btn-outline-primary px-4 py-2" asp-action="Index" asp-route-cityName="@ViewBag.CityName">
+                <i class="bi bi-arrow-left"></i> Back to List
+            </a>
+            <a class="btn btn-success px-4 py-2" asp-controller="Booking" asp-action="CreateMyBooking" asp-route-cityName="@ViewBag.CityName"
                asp-route-customerId="@ViewBag.Customer.CustomerId" asp-route-destinationId="@Model.DestinationId">
-                Rezerva
+                <i class="bi bi-check-circle"></i> Rezerva
             </a>
         </div>
     </div>
@@ -66,5 +65,35 @@
         width: 100%;
         height: 500px;
         object-fit: cover;
+        border-radius: 10px;
+    }
+
+    .card-body {
+        background-color: #f8f9fa;
+    }
+
+    .btn-outline-primary:hover, .btn-success:hover {
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .btn-outline-primary {
+        border-color: #007bff;
+        color: #007bff;
+        border-radius: 25px; /* rotunjire pentru butonul de tip outline */
+    }
+
+    .btn-outline-primary:hover {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        border-color: #28a745;
+        border-radius: 25px; /* rotunjire pentru butonul de succes */
+    }
+
+    .btn-success:hover {
+        background-color: #218838;
     }
 </style>

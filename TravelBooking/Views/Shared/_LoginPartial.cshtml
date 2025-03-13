@@ -4,46 +4,76 @@
 @inject UserManager<IdentityUser> UserManager
 @inject CustomerViewModelFactory _factory
 
+<!-- Link-ul pentru Font Awesome -->
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+</head>
+
 <ul class="navbar-nav flex-grow-1">
     @if (SignInManager.IsSignedIn(User))
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Destination" asp-action="Search">Search for a destination</a>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Destination" asp-action="Search">
+                <i class="fas fa-search"></i> Search for a destination
+            </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Destination" asp-action="Index">Destinations</a>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Destination" asp-action="Index">
+                <i class="fas fa-map-marker-alt"></i> Destinations
+            </a>
         </li>
     }
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">
+            <i class="fas fa-shield-alt"></i> Privacy
+        </a>
     </li>
 </ul>
 
 <ul class="navbar-nav">
-@if (SignInManager.IsSignedIn(User))
-{
-    var customer = _factory.GetNewCustomerViewModel(User.Identity.Name);
-    <li class="nav-item">
-        @* <a class="nav-link text-dark" asp-area="Booking" asp-page="/GetUserBookings/68fac6a3-b83b-414c-9c4e-eb42b6cc78cd" title="Manage">My Bookings</a> *@
-        <a class="nav-link text-dark" asp-controller="Booking" asp-action="GetUserBookings" asp-route-id="@customer.CustomerId" title="Manage">My Bookings</a>
-
-    </li>
-    <li class="nav-item">
-        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">My Account</a>
-    </li>
-    <li class="nav-item">
-        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-        </form>
-    </li>
-}
-else
-{
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
-    </li>
-}
+    @if (SignInManager.IsSignedIn(User))
+    {
+        var customer = _factory.GetNewCustomerViewModel(User.Identity.Name);
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Booking" asp-action="GetUserBookings" asp-route-id="@customer.CustomerId" title="Manage">
+                <i class="fas fa-suitcase"></i> My Bookings
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+                <i class="fas fa-user-cog"></i> My Account
+            </a>
+        </li>
+        <li class="nav-item">
+            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button type="submit" class="nav-link btn btn-link text-dark">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">
+                <i class="fas fa-user-plus"></i> Register
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </a>
+        </li>
+    }
 </ul>
+
+<style>
+    .nav-link i {
+        margin-right: 8px;
+    }
+
+    .nav-link:hover {
+        color: #007bff;
+        text-decoration: underline;
+    }
+</style>

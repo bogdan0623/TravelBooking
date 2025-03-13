@@ -5,33 +5,49 @@
     var countries = new SelectList(ViewBag.Countries, "CountryId", "Name");
 }
 
-<h1>Cauta o destinatie</h1>
+<!-- Titlu cu stil personalizat -->
+<h1 class="text-center text-dark mb-5" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Căutați o destinație</h1>
 
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Search">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="CountryId" class="control-label">Tara</label>
-                <select asp-for="CountryId" class="form-control" asp-items="countries" id="CountryDropdown">
-                    <option value="">Alege tara</option>
-                </select>
-                <span asp-validation-for="CountryId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CityId" class="control-label">Oras</label>
-                <select asp-for="CityId" class="form-control" id="CityDropdown" disabled>
-                    <option value="">Alege orasul</option>
-                </select>
-                <span asp-validation-for="CityId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Search" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form asp-action="Search" style="background-color: #f9f9f9; padding: 30px; border-radius: 10px; box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <!-- Câmpul Țara cu iconiță -->
+                <div class="form-group mb-4">
+                    <label asp-for="CountryId" class="control-label">
+                        <i class="fas fa-globe-americas"></i> Țara
+                    </label>
+                    <select asp-for="CountryId" class="form-control" asp-items="countries" id="CountryDropdown">
+                        <option value="">Alege țara</option>
+                    </select>
+                    <span asp-validation-for="CountryId" class="text-danger"></span>
+                </div>
+
+                <!-- Câmpul Oraș cu iconiță -->
+                <div class="form-group mb-4">
+                    <label asp-for="CityId" class="control-label">
+                        <i class="fas fa-building"></i> Oraș
+                    </label>
+                    <select asp-for="CityId" class="form-control" id="CityDropdown" disabled>
+                        <option value="">Alege orașul</option>
+                    </select>
+                    <span asp-validation-for="CityId" class="text-danger"></span>
+                </div>
+
+                <!-- Butonul de căutare -->
+                <br>
+                <div class="form-group text-center mb-5">
+                    <input type="submit" value="Căutați" class="btn btn-primary btn-lg" style="border-radius: 25px; transition: background-color 0.3s;" />
+                </div>
+            </form>
+        </div>
     </div>
 </div>
+
+<!-- Include Font Awesome CDN -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
 @section Scripts {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -45,12 +61,11 @@
 
                     // Make an AJAX request to get cities for the selected country
                     $.ajax({
-                        url: '@Url.Action("GetCitiesByCountry", "Destination")', // Replace "YourController" with the actual controller name
+                        url: '@Url.Action("GetCitiesByCountry", "Destination")',
                         dataType: 'json',
                         data: { countryId: countryId },
                         success: function (data) {
                             // Clear existing options in city dropdown
-                            console.log(data);
                             $('#CityDropdown').empty();
                             $('#CityDropdown').append('<option value="">Select a city</option>');
 
@@ -60,9 +75,9 @@
                             });
                         },
                         error: function () {
-                        $('#CityDropdown').empty();
-                        $('#CityDropdown').append('<option value="">Error loading cities</option>');
-                    }
+                            $('#CityDropdown').empty();
+                            $('#CityDropdown').append('<option value="">Error loading cities</option>');
+                        }
                     });
                 } else {
                     // Disable the city dropdown if no country is selected
@@ -75,5 +90,5 @@
     </script>
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }    
+    }
 }

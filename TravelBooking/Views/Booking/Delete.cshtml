@@ -1,91 +1,129 @@
 ﻿@model TravelBooking.Models.ViewModels.BookingViewModel
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Anulare rezervare";
 }
 
-<h1>Anulare rezervare</h1>
+<!-- Container principal -->
+<div class="container my-5">
+    <div class="cancel-box border shadow-lg p-4 bg-white">
+        <h1 class="text-center text-danger">Anulare rezervare</h1>
+        <h3 class="text-center">Sunteți sigur că doriți să anulați această rezervare?</h3>
+        <hr />
 
-<h3>Sunteti sigur ca doriti sa anulati aceasta rezervare?</h3>
-<div>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            Nume
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CustomerName)
-        </dd>
-        <dt class = "col-sm-2">
-            E-mail
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CustomerEmail)
-        </dd>
-        <dt class = "col-sm-2">
-            Telefon
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CustomerPhone)
-        </dd>
-        <dt class = "col-sm-2">
-            Hotel
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DestinationName)
-        </dd>
-        <dt class = "col-sm-2">
-            Locatie
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DestinationLocation)
-        </dd>
-        <dt class = "col-sm-2">
-            Check-in
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CheckIn)
-        </dd>
-        <dt class = "col-sm-2">
-            Check-out
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CheckOut)
-        </dd>
-        <dt class = "col-sm-2">
-            Data rezervarii
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreatedDate)
-        </dd>
-        <dt class = "col-sm-2">
-            Data modificarii
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LastModifiedDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Status)
-        </dd>        
-        <dt class = "col-sm-2">
-            Numar de persoane
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NumberOfPersons)
-        </dd>
-        <dt class="col-sm-2">
-            Total
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="BookingId" />
-        <input type="submit" value="Delete" class="btn btn-danger" />
-    </form>
+        <!-- Detalii client -->
+        <div class="row">
+            <div class="col-sm-6">
+                <h5>Detalii client</h5>
+                <dl class="row">
+                    <dt class="col-sm-4">Nume</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.CustomerName)</dd>
+                    <dt class="col-sm-4">E-mail</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.CustomerEmail)</dd>
+                    <dt class="col-sm-4">Telefon</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.CustomerPhone)</dd>
+                </dl>
+            </div>
+
+            <!-- Detalii rezervare -->
+            <div class="col-sm-6">
+                <h5>Detalii rezervare</h5>
+                <dl class="row">
+                    <dt class="col-sm-4">Hotel</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.DestinationName)</dd>
+                    <dt class="col-sm-4">Locație</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.DestinationLocation)</dd>
+                    <dt class="col-sm-4">Check-in</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.CheckIn)</dd>
+                    <dt class="col-sm-4">Check-out</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.CheckOut)</dd>
+                    <dt class="col-sm-4">Data rezervării</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.CreatedDate)</dd>
+                    <dt class="col-sm-4">Data modificării</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.LastModifiedDate)</dd>
+                    <dt class="col-sm-4">Status</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Status)</dd>
+                </dl>
+            </div>
+        </div>
+
+        <!-- Detalii costuri -->
+        <div class="col-sm-6">
+            <h5>Detalii cost</h5>
+            <dl class="row">
+                <dt class="col-sm-4">Număr de persoane</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.NumberOfPersons)</dd>
+                <dt class="col-sm-4">Total</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Price)</dd>
+            </dl>
+        </div>
+
+        <!-- Form de ștergere -->
+        <div class="mt-4 text-center">
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="BookingId" />
+                <button type="submit" class="btn btn-danger btn-lg" style="border-radius: 15px;">Confirmă anulare</button>
+            </form>
+        </div>
+    </div>
 </div>
+
+<!-- CSS pentru stilizare -->
+<style>
+    .cancel-box {
+        max-width: 1000px;
+        margin: 0 auto;
+        font-family: 'Arial', sans-serif;
+        font-size: 16px;
+    }
+
+        .cancel-box h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .cancel-box h3 {
+            font-size: 24px;
+            color: #dc3545; /* Culoare roșie pentru a semnala acțiunea critică */
+            margin-bottom: 30px;
+        }
+
+        .cancel-box dl {
+            margin-bottom: 10px;
+        }
+
+        .cancel-box dt {
+            font-weight: bold;
+        }
+
+        .cancel-box dd {
+            margin-left: 0;
+            margin-bottom: 8px;
+        }
+
+        .cancel-box hr {
+            margin: 20px 0;
+        }
+
+        .cancel-box .row {
+            margin-bottom: 20px;
+        }
+
+        .cancel-box .btn {
+            font-size: 18px;
+            padding: 10px 30px;
+        }
+
+        .cancel-box .text-center {
+            text-align: center;
+        }
+
+        .cancel-box .col-sm-4 {
+            text-align: right;
+            font-weight: bold;
+        }
+
+        .cancel-box .col-sm-8 {
+            text-align: left;
+        }
+</style>

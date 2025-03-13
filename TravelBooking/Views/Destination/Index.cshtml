@@ -1,57 +1,86 @@
 ﻿@model IEnumerable<TravelBooking.Models.ViewModels.DestinationViewModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Destinații";
 }
 
-<h1>Destinatii</h1>
+<h1 class="text-center mb-4">Destinații</h1>
 
 <table class="table">
     <thead>
         <tr>
-            <th>
-                
-            </th>
-            <th>
-                Hotel
-            </th>
-            <th>
-                Locatie
-            </th>
-            <th>
-                Pret/Noapte/Persoana
-            </th>            
+            <th></th>
+            <th><i class="fas fa-hotel"></i> Hotel</th>
+            <th><i class="fas fa-map-marker-alt"></i> Locatie</th>
+            <th><i class="fas fa-dollar-sign"></i> Pret/Noapte/Persoana</th>
+            <th></th>
+            <th><i class="fas fa-eye"></i> Detalii</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @if (!string.IsNullOrWhiteSpace(item.ImagesNames[0]))
-                {
-                    @* <img src="@item.PicturePath" width="100" /> *@
-                    <img src="@Url.Content(item.ImagesNames[0])" width="100" height="100" class="img-thumbnail" alt="Destination Image" />
-                    @* <img src="@Url.Content("/images/f1.jpg")" width="100" height="100" class="img-thumbnail" alt="Destination Image" /> *@
-                }
-                else
-                {
-                    <p>No image</p>
-                }
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Location)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PricePernightPerPerson)
-            </td>            
-            <td>
-                <a asp-action="Details" asp-route-id="@item.DestinationId" asp-route-cityName="@ViewBag.CityName">Details</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @if (!string.IsNullOrWhiteSpace(item.ImagesNames[0]))
+                    {
+                        <img src="@Url.Content(item.ImagesNames[0])" class="img-thumbnail custom-img" alt="Destination Image" />
+                    }
+                    else
+                    {
+                        <p style="display:none;">No image</p>
+                    }
+                </td>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Location)</td>
+                <td>@Html.DisplayFor(modelItem => item.PricePernightPerPerson)</td>
+                <td></td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.DestinationId" asp-route-cityName="@ViewBag.CityName" style="color: black; font-size: 20px;">
+                        <i class="fas fa-eye"></i>
+                    </a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+<style>
+    .table {
+        margin-bottom: 1rem;
+        background-color: #fff;
+    }
+
+    .table-striped tbody tr:nth-child(odd) {
+        background-color: #f9f9f9;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .btn-outline-dark {
+        color: #343a40;
+        border-color: #343a40;
+    }
+
+        .btn-outline-dark:hover {
+            background-color: #343a40;
+            color: #fff;
+        }
+
+    .custom-img {
+        width: 120px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 8px;
+        box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075);
+        transition: transform 0.3s ease-in-out;
+    }
+
+        .custom-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 .25rem .5rem rgba(0, 0, 0, .15);
+        }
+</style>

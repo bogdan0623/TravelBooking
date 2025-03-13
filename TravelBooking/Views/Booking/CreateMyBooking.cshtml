@@ -4,59 +4,73 @@
     ViewData["Title"] = "CreateMyBooking";
 }
 
-<h1>CreateMyBooking</h1>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+</head>
 
-<h4>Booking</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="CreateMyBooking">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="CustomerId" class="control-label">Nume</label>
+<h1 class="text-center mb-4">Creează rezervarea</h1>
+
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <form asp-action="CreateMyBooking" class="bg-light p-4 rounded shadow-sm">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <!-- Customer Info Section -->
+            <div class="form-group mb-3">
+                <label asp-for="CustomerId" class="form-label small">Nume <i class="bi bi-person-circle"></i></label>
                 <input readonly class="form-control" value="@ViewBag.CustomerViewModel.Name" />
-                <input hidden asp-for="CustomerId" class="form-control" value="@ViewBag.Customer.CustomerId"/>
+                <input hidden asp-for="CustomerId" class="form-control" value="@ViewBag.Customer.CustomerId" />
                 <span asp-validation-for="CustomerId" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label class="control-label">Email</label>
+            <div class="form-group mb-3">
+                <label class="form-label small">Email <i class="bi bi-envelope"></i></label>
                 <input readonly class="form-control" value="@ViewBag.CustomerViewModel.Email" />
             </div>
-            <div class="form-group">
-                <label class="control-label">Telefon</label>
+            <div class="form-group mb-3">
+                <label class="form-label small">Telefon <i class="bi bi-phone"></i></label>
                 <input readonly class="form-control" value="@ViewBag.CustomerViewModel.Phone" />
             </div>
-            <div class="form-group">
-                <label asp-for="DestinationId" class="control-label">Hotel</label>
-                <input readonly class="form-control" value="@ViewBag.DestinationViewModel.Name"/>
-                <input hidden asp-for="DestinationId" class="form-control" value="@ViewBag.Destination.DestinationId"/>
+
+            <!-- Destination Info Section -->
+            <div class="form-group mb-3">
+                <label asp-for="DestinationId" class="form-label small">Hotel <i class="bi bi-hotel"></i></label>
+                <input readonly class="form-control" value="@ViewBag.DestinationViewModel.Name" />
+                <input hidden asp-for="DestinationId" class="form-control" value="@ViewBag.Destination.DestinationId" />
                 <span asp-validation-for="DestinationId" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label class="control-label">Locatie</label>
+            <div class="form-group mb-3">
+                <label class="form-label small">Locație <i class="bi bi-geo-alt"></i></label>
                 <input readonly class="form-control" value="@ViewBag.DestinationViewModel.Location" />
             </div>
-            <div class="form-group">
-                <label asp-for="CheckIn" class="control-label">Check-in</label>
-                <input asp-for="CheckIn" class="form-control" />
+
+            <!-- Date Selection -->
+            <div class="form-group mb-3">
+                <label asp-for="CheckIn" class="form-label small">Check-in <i class="bi bi-calendar-check"></i></label>
+                <input asp-for="CheckIn" class="form-control" type="date" />
                 <span asp-validation-for="CheckIn" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="CheckOut" class="control-label">Check-out</label>
-                <input asp-for="CheckOut" class="form-control" />
+            <div class="form-group mb-3">
+                <label asp-for="CheckOut" class="form-label small">Check-out <i class="bi bi-calendar-x"></i></label>
+                <input asp-for="CheckOut" class="form-control" type="date" />
                 <span asp-validation-for="CheckOut" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="NumberOfPersons" class="control-label">Numar de persoane</label>
-                <input asp-for="NumberOfPersons" class="form-control" id="numberOfPersons"/>
+
+            <!-- Number of Persons -->
+            <div class="form-group mb-3">
+                <label asp-for="NumberOfPersons" class="form-label small">Număr de persoane <i class="bi bi-person-plus"></i></label>
+                <input asp-for="NumberOfPersons" class="form-control" id="numberOfPersons" type="number" min="1" />
                 <span asp-validation-for="NumberOfPersons" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label class="control-label">Pret total</label>
+
+            <!-- Total Price -->
+            <div class="form-group mb-4">
+                <label class="form-label small">Preț total <i class="bi bi-cash"></i></label>
                 <input type="text" id="totalPrice" class="form-control" readonly />
             </div>
+
+            <!-- Submit Button -->
             <div class="form-group">
-                <input type="submit" value="Rezerva" class="btn btn-primary" />
+                <input type="submit" value="Rezervă" class="btn btn-primary w-100" style="border-radius: 15px;" />
             </div>
         </form>
     </div>

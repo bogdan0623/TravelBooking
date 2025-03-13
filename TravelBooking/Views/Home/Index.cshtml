@@ -2,7 +2,112 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center"> 
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vacanța Ta de Vis</title>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #f4f4f4;
+            color: black;
+        }
+
+        .hero {
+            background: url('https://source.unsplash.com/1600x900/?travel') no-repeat center center/cover;
+            height: 35vh; /* Am redus înălțimea */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-shadow: none;
+            color: black;
+            padding-bottom: 5px; /* Am redus paddingul de jos */
+        }
+
+            .hero h1 {
+                font-size: 2.5em;
+                margin-bottom: 0; /* Am eliminat marginile de sub titlu */
+            }
+
+            .hero p {
+                font-size: 1.1em;
+                margin-bottom: 0; /* Am eliminat marginea de sub paragraf */
+            }
+
+            .hero i {
+                font-size: 2em;
+                margin-left: 10px;
+                color: #ff5733;
+            }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 10px; /* Am redus paddingul */
+            margin-top: 10px; /* Am redus marginile sus */
+        }
+
+        .gallery-item {
+            text-align: center;
+            margin: 5px; /* Am redus spațiul între imagini */
+        }
+
+        .gallery img {
+            width: 280px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0px 3px 8px rgba(0,0,0,0.3);
+        }
+
+        .gallery p {
+            margin-top: 3px;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>Rezervă-ți vacanța de vis în doar câteva clickuri!</h1>
+        <p>Fă-ți bagajele! Următoarea aventură te așteaptă... <i class="fas fa-plane"></i></p> <!-- Simbolul cu avionul direct în mesaj -->
+    </div>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="@Url.Content("~/images/Barcelona.jpg")" alt="Barcelona">
+            <p>Barcelona</p>
+        </div>
+        <div class="gallery-item">
+            <img src="@Url.Content("~/images/roma.jpg")" alt="Roma">
+            <p>Roma</p>
+        </div>
+        <div class="gallery-item">
+            <img src="@Url.Content("~/images/milano.jpg")" alt="Milano">
+            <p>Milano</p>
+        </div>
+        <div class="gallery-item">
+            <img src="@Url.Content("~/images/zakynthos.jpg")" alt="Zakynthos">
+            <p>Zakynthos</p>
+        </div>
+        <div class="gallery-item">
+            <img src="@Url.Content("~/images/rhodos.jpg")" alt="Rhodos">
+            <p>Rhodos</p>
+        </div>
+        <div class="gallery-item">
+            <img src="@Url.Content("~/images/alicante.jpg")" alt="Alicante">
+            <p>Alicante</p>
+        </div>
+    </div>
+</body>
+</html>
